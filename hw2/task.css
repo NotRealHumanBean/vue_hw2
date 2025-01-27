@@ -200,3 +200,6 @@ table thead th {
     display: flex;
     justify-content: space-between;
 }
+.task-height {
+    height: fit-content;
+}
