@@ -13,7 +13,7 @@ body {
     color: black;
 }
 .task__wrapper {
-    /* height: 100%; */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,16 +42,6 @@ body {
 .task4__wrapper {
     display: flex;
     flex-direction: column;
-}
-.money {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-.money__input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 .warning__message {
     background-color: rgb(232, 75, 75);
@@ -183,15 +173,6 @@ body {
 .header-block__title {
     margin: 0px;
 } 
-
-.main-block {
-}
- .main-block__title {
-
- }
- .main-block__text {
-
- }
  .main-block__links {
     display: flex;
     gap:10px;
