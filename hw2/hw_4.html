@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 4</title>
+</head>
+<!--  Задача 4.
+Вивести список як маркований список з елементами у форматі (name: salary)
+ -->
+
+<body>
+    <div id="app">
+        <div class="task__wrapper">
+            <div class="task__container">
+                <ul>
+                    <template v-for="worker in returnWorkers" :key="worker.id">
+                        <li>
+                            <strong>{{worker.name}}</strong> - {{worker.salary}}
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const workersList2 = [
+            {
+                id: '111',
+                name: 'Іванов',
+                salary: 10000,
+            },
+            {
+                id: "112",
+                name: 'Петров',
+                salary: 20000,
+            },
+            {
+                id: "113",
+                name: 'Сидоров',
+                salary: 50000,
+            },
+        ]
+        createApp({
+            data() {
+                return {
+
+                }
+            },
+            computed: {
+                returnWorkers() {
+                    return workersList2
+                }
+            },
+            methods: {
+
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

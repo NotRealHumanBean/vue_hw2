@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Libre:wght@400;700&display=swap');
+html {
+    height: 100%;
+}
+#app {
+    height: 100%;
+}
+body {
+    background: #ffce1b;
+    height: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    color: black;
+}
+.task__wrapper {
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.task__container {
+    display: flex;
+    gap: 30px;
+}
+
+.task__container label {
+    font-size: 18px;
+}
+.input__container {
+    margin-top: 60px;
+}
+
+.color-one {
+    color: black;
+    background: #ffce1b;
+    border-color: black;
+    margin: 0px;
+}
+.add-button {
+    margin-top: 15px;
+}
+.task4__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.money {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.money__input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.warning__message {
+    background-color: rgb(232, 75, 75);
+    color: azure;
+    margin-top: 15px;
+    
+}
+.welcoming__message {
+    background-color: rgb(75, 182, 123);
+    color: azure;
+}
+.render {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: "Averia Libre", serif;
+}
+.login, .password {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* --------------------------------------------------------------------------------------------------------------------- */
+.task1 {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+.task1 img {
+    width: 400px;
+    height: 400px;
+}
+.task1 .warning__message, .task1 .welcoming__message {
+    margin: 0;
+}
+.message-for-ivan {
+    background-color: #4728e1;
+
+}
+.business-class, .econom-class {
+    height: 600px;
+    width: 600px;
+    padding: 50px;
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+}
+.select-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+/* --------------------------------------------------------------------------------------------------------------------- */
+.image-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    z-index: 1;
+}
+.english-word {
+    position: absolute;
+    bottom: 0;
+    left: 120px;
+    z-index: 5;
+    color: aliceblue;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+}
+.task3 {
+    padding: 20px;
+}
+.margin {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+.winning {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.winning img {
+    width: 400px;
+    height: 400px;
+}
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+.task5 {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+    padding: 40px 0px;
+    gap: 50px;
+}
+
+.text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+.header-block {
+    display: flex;
+    gap: 10px;
+}
+.header-block__image {
+    width: 60px;
+    height: 60px;
+}
+.header-block__image img {
+    width: 100%;
+    height: 100%;
+}
+.header-block__title {
+    margin: 0px;
+} 
+
+.main-block {
+}
+ .main-block__title {
+
+ }
+ .main-block__text {
+
+ }
+ .main-block__links {
+    display: flex;
+    gap:10px;
+ }
+ .task6 {
+    flex-direction: column;
+ }
+ .table-container {
+    display: flex;
+    gap: 30px;
+ }
+tr {
+    display: flex;
+    flex-direction: column;
+}
+table thead th {
+    color: black;
+    font-weight: 600;
+}
+.deleted {
+    display: none;
+}
+.meal-table-cell {
+    min-width: 300px;
+    display: flex;
+    justify-content: space-between;
+}

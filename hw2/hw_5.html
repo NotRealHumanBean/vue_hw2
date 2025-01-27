@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 5</title>
+</head>
+<!-- Самостійно сформуйте масив даних та виведіть фрагмент на зразок поданого (дані не обов’язково повинні співпадати)  -->
+
+<body>
+    <div id="app">
+        <div class="task__wrapper task5">
+            <div v-for="el in returnArray" :key="el.id" class="task__container">
+                <div class="text-block">
+                    <div class="header-block">
+                        <div class="header-block__image">
+                            <img :src="el.image" alt="Image">
+                        </div>
+                        <div>
+                            <h6 class="header-block__title">{{el.small_title}}</h6>
+                            <a :href="el.headlink">{{el.headlink}}</a>
+                        </div>
+                    </div>
+
+                    <div class="main-block">
+                        <h2 class="main-block__title">{{el.title}}</h2>
+                        <p class="main-block__text">{{el.text}}</p>
+                        <!-- <div>{{el.links}}</div> -->
+                        <div class="main-block__links">
+                            <template v-for="(link, ind) in el.links" :key="ind">
+                                <a :href="link">{{link}}</a>
+                            </template>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const frameworks = [
+            {
+                id: 1,
+                image: 'img/react.jpg',
+                small_title: 'React',
+                headlink: 'https://reactjs.org/',
+                title: 'React',
+                text: 'React є однією з найпопулярніших бібліотек для створення інтерфейсів користувача. Вона дозволяє розробникам створювати швидкі та інтуїтивно зрозумілі веб-додатки.',
+                links: ['https://reactjs.org/docs/getting-started.html', 'https://reactjs.org/tutorial/tutorial.html']
+            },
+            {
+                id: 2,
+                image: 'img/vue.png',
+                small_title: 'Vue',
+                headlink: 'https://vuejs.org/',
+                title: 'Vue',
+                text: 'Vue є гнучким фреймворком для створення інтерфейсів користувача. Він простий у використанні та має велику екосистему інструментів та плагінів.',
+                links: ['https://vuejs.org/v2/guide/', 'https://vuejs.org/v2/examples/']
+            },
+            {
+                id: 3,
+                image: 'img/angular.png',
+                small_title: 'Angular',
+                headlink: 'https://angular.io/',
+                title: 'Angular',
+                text: 'Angular - це потужний фреймворк для створення динамічних веб-додатків. Він надає розробникам інструменти для створення масштабованих і надійних додатків.',
+                links: ['https://angular.io/guide/what-is-angular', 'https://angular.io/start']
+            },
+            {
+                id: 4,
+                image: 'img/svelte.png',
+                small_title: 'Svelte',
+                headlink: 'https://svelte.dev/',
+                title: 'Svelte',
+                text: 'Svelte відрізняється від інших фреймворків тим, що робить більшість роботи під час компіляції. Це дозволяє створювати дуже швидкі веб-додатки з мінімальним розміром коду.',
+                links: ['https://svelte.dev/tutorial', 'https://svelte.dev/examples']
+            }
+        ];
+
+        createApp({
+            data() {
+                return {
+
+                }
+            },
+            computed: {
+                returnArray() {
+                    return frameworks
+                }
+            },
+            methods: {
+
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

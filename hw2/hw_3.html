@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 3</title>
+</head>
+<!-- Задача 3.
+Елемент тренажера англійської. Виводимо зображення елемента і слово.
+ Користувач вводить відповідь. Якщо вірно – відтворюємо фразу «Добре. Молодець!» (і додаємо зелену рамку до елемента),
+  якщо ні - то відтворюємо фразу «Невірно, спробуйте ще раз» (і додаємо червону рамку).  -->
+
+<body>
+    <style>
+        .green-border {
+            border: 3px solid rgb(31, 142, 31)
+        }
+
+        .red-border {
+            border: 3px solid rgb(198, 28, 25)
+        }
+    </style>
+    <div id="app">
+        <div v-if="!youWon" class="task__wrapper">
+            <div class="task__container task3" :class="{
+                [checkBorder]: isTranslationNotNull,
+            }">
+                <div class="image-container">
+                    <img :src="returnDictionaty[image_counter].img" alt="Image">
+                    <h6 class="english-word">{{returnDictionaty[image_counter].word}}</h6>
+                </div>
+                <div class="translate-content">
+                    <label>Ваш переклад: </label>
+                    <input type="text" v-model="word">
+                    <button @click="checkTranslation" class="color-one margin">Перевірити</button>
+                    <button v-if="isTranslationCorrect" @click="continueGame" class="color-one">Продовжити</button>
+                    <div v-if="isTranslationNotNull">
+                        <h3 v-if="isTranslationCorrect">Добре! Молодець!!!</h3>
+                        <h3 v-else-if="!isTranslationCorrect">Невірно! Спробуйте ще раз!</h3>
+                    </div>
+                </div>
+                <div v-if="isTranslationCorrect" class="continue-wrapper">
+
+                </div>
+            </div>
+        </div>
+        <div v-else="youWon" class="winning">
+            <h2>Congratulations! You won !!!</h2>
+            <img src="smile.jpg" alt="Congratulations!">
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue
+        const dictionary = [
+            {
+                id: 1,
+                img: 'img/bridge.jpg',
+                word: 'bridge',
+                translation: "міст",
+            },
+            {
+                id: 2,
+                img: 'img/castle.jpg',
+                word: 'castle',
+                translation: "замок",
+            },
+            {
+                id: 3,
+                img: 'img/moon.jpg',
+                word: 'moon',
+                translation: "місяць",
+            },
+            {
+                id: 4,
+                img: 'img/road.jpg',
+                word: 'road',
+                translation: "дорога",
+            },
+            {
+                id: 5,
+                img: 'img/tower.jpg',
+                word: 'tower',
+                translation: "вежа",
+            },
+            {
+                id: 6,
+                img: 'img/waterfall.jpg',
+                word: 'waterfall',
+                translation: "водоспад",
+            },
+
+        ]
+
+
+        createApp({
+            data() {
+                return {
+                    word: null,
+                    image_counter: 0,
+                    validTranslation: null
+                }
+            },
+            computed: {
+                returnDictionaty() {
+                    return dictionary
+                },
+                isTranslationNotNull() {
+                    return this.validTranslation !== null
+                },
+                isTranslationCorrect() {
+                    return this.validTranslation === true
+                },
+                checkBorder() {
+                    let borderClass;
+                    return this.isTranslationCorrect ? 'green-border' : 'red-border'
+                },
+                youWon() {
+                    if (this.image_counter > 5) {
+                        return true
+                    }
+                }
+
+            },
+            methods: {
+                checkTranslation() {
+                    this.validTranslation = dictionary.some(user => user.translation === this.word)
+                    console.log(this.word)
+                    this.onClear()
+                    console.log("here", this.word)
+                },
+                continueGame() {
+                    this.image_counter++
+                    this.validTranslation = null
+                    console.log(this.validTranslation)
+                },
+                onClear() {
+                    this.word = null
+                },
+
+
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

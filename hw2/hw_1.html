@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 1</title>
+</head>
+<!-- Задача 1.
+
+Вводимо логіна і пароль.
+Якщо логін вірний відображаємо смайл. Якщо ні, то: Якщо логін вірний відображаємо смайл. Якщо ні, то:
+    якщо логін = Іван – колір повідомлення про помилку синій
+    якщо хтось інший, то колір повідомлення червоний
+ -->
+
+<body>
+    <div id="app">
+        <div class="task__wrapper">
+            <div class="task__container task1">
+                <div class="login__container">
+                    <div class="login">
+                        <label for="">Login: </label>
+                        <input type="text" placeholder="your login" v-model="login">
+                    </div>
+                    <div class="password">
+                        <label for="">Password:</label>
+                        <input type="text" placeholder="your passwrd" v-model="password">
+                        <button class="color-one" @click="checkUser">GO</button>
+                    </div>
+                </div>
+                <div class="render" v-if="renderAlert">
+                    <img src="smile.jpg" alt="Smile!" v-if="userValid">
+                    <p class="alert alert-warning warning__message message-for-ivan" v-else-if="isIvan">Тобі сюди не
+                        можна Іване!</p>
+                    <p class="alert alert-warning warning__message" v-else>Вхід заборонено!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        let credentials = [
+            {
+                login: "u",
+                password: "q"
+            },
+            {
+                login: "profound_user",
+                password: "1456aa3"
+            },
+            {
+                login: "admin",
+                password: "122333"
+            },
+            {
+                login: "client",
+                password: "mmqws11226"
+            },
+            {
+                login: "traveller",
+                password: "password"
+            },
+            {
+                login: "geek",
+                password: "00000000000"
+            },
+            {
+                login: "master",
+                password: "smith325"
+            },
+        ]
+        createApp({
+            data() {
+                return {
+                    login: null,
+                    password: null,
+                    userValid: null,
+                    renderAlert: false
+                }
+            },
+            computed: {
+                isIvan() {
+                    return this.login === "Іван"
+                }
+
+            },
+            methods: {
+                checkUser() {
+                    this.userValid = credentials.some(user => user.login === this.login && user.password === this.password)
+                    this.renderAlert = true;
+                }
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

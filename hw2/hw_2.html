@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--  Задача 2.
+З випадаючого списку вибираємо клас квитка у літаку. Якщо
+    бізнес - виводимо елементи для вибору газети та коньяку (якщо вибрано коньяк, то запропонувати закуску (так/ні)), на фоні зображення бізнес кают
+    економ – виводимо елементи для вибору типу пива і чипсів, на фоні хмарки.
+ -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 2</title>
+</head>
+
+<body>
+    <style>
+        .business-class {
+            background: url('business.webp');
+        }
+
+        .econom-class {
+            background: url('econom.jpg');
+        }
+    </style>
+    <div id="app">
+        <div class="task__wrapper">
+            <div class="task__container">
+                <div class="airplane-class col-lg-6">
+                    <label for="clas-select">Виберіть клас: </label>
+                    <select name="clas-select" id="clas" v-model="chosen">
+                        <option hidden></option>
+                        <option value="Business">Business class</option>
+                        <option value="Econom">Econom class</option>
+                    </select>
+                </div>
+                <div class="col-lg-6" :class="{
+                    'business-class': isBusiness,
+                    'econom-class': isEconom,
+                }">
+                    <template v-if="isBusiness">
+                        <div class="select-content">
+                            <div>
+                                <label for="clas-select">Виберіть коньяк: </label>
+                                <select name="brandy-select" id="brandy" v-model="brandy">
+                                    <option hidden></option>
+                                    <option value="Hennesy">Hennesy</option>
+                                    <option value="Martell">Martell</option>
+                                    <option value="Remy Martin">Remy Martin</option>
+                                    <option value="Courvoisieur">Courvoisieur</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="bnewspaper-select">Виберіть газету: </label>
+                                <select name="newspaper-select" id="newspaper" v-model="newspaper">
+                                    <option hidden></option>
+                                    <option value="The Sun">The Sun</option>
+                                    <option value="The Guardian">The Guardian</option>
+                                    <option value="Washingthon Post">Washingthon Post</option>
+                                    <option value="BBC">BBC</option>
+                                    <option value="The Telegraph">The Telegraph</option>
+                                </select>
+                            </div>
+                            <div v-if="isBrandy">
+                                <p>Бажаєте закуску ?</p>
+                                <fieldset>
+                                    <input type="radio" id="yes" name="food" value="Yes" v-model="food" />
+                                    <label for="yes">Так</label>
+                                    <br>
+                                    <input type="radio" id="no" name="food" value="No" />
+                                    <label for="no">Ні</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <p class="order" v-if="orderTimeBusiness">Ваше замовлення: {{brandy}}, {{newspaper}}
+                            <span v-if="isFood">та закуска</span>
+                        </p>
+                    </template>
+                    <template v-if="isEconom">
+                        <div class="select-content">
+                            <div>
+                                <label for="clas-select">Виберіть пиво: </label>
+                                <select name="beer-select" id="beer" v-model="beer">
+                                    <option hidden></option>
+                                    <option value="Guinness">Guinness</option>
+                                    <option value="Hofbrau">Hofbrau</option>
+                                    <option value="Erdinger">Erdinger</option>
+                                    <option value="Tennent`s Stout">Tennent`s Stout</option>
+                                    <option value="Pilsner">Pilsner</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="chips-select">Виберіть чипси: </label>
+                                <select name="chips-select" id="chips" v-model="chips">
+                                    <option hidden></option>
+                                    <option value="Lays">Lays</option>
+                                    <option value="Lux">Lux</option>
+                                    <option value="Pringles">Pringles</option>
+                                    <option value="Flint">Flint</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="order" v-if="orderTimeEconom">Ваше замовлення: {{beer}} та {{chips}}</p>
+                </div>
+                </template>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    chosen: null,
+                    brandy: null,
+                    newspaper: null,
+                    food: null,
+                    beer: null,
+                    chips: null
+                }
+            },
+            computed: {
+                isBusiness() {
+                    console.log(this.chosen)
+                    return this.chosen === 'Business'
+                },
+                isEconom() {
+                    return this.chosen === 'Econom'
+                },
+                isBrandy() {
+                    return this.brandy
+                },
+                orderTimeEconom() {
+                    return this.beer && this.chips
+                },
+                orderTimeBusiness() {
+                    return this.brandy && this.newspaper
+                },
+                isFood() {
+                    return this.food
+                }
+
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

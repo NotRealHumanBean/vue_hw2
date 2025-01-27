@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+    <link rel="stylesheet" href="task.css">
+    <title>Task 6</title>
+</head>
+<!--  На кухню поступають замовлення. Спочатку ми додаємо їх у список “Очікують на виконання”,
+   якщо повар береться робити — замовлення переходить у список “Виконуються”,
+   якщо замовлення виконано — переходить у список “Готові до виносу”. Якщо натиснути на “Подано” - страва зникає з таблиці
+ -->
+
+<body>
+    <div id="app">
+        <div class="task__wrapper">
+            <div class="task__container task6">
+                <div class="input__container">
+                    <label>Нова замовлена страва: </label>
+                    <input type="text" v-model="meal">
+                    <button @click="addMeal" class="color-one add-button">Додати</button>
+                </div>
+                <div class="table-container">
+                    <table class="meal-table" nowrap>
+                        <thead>
+                            <tr>
+                                <th>Очікують на виконання</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <template v-for="(el, ind) in returnWaitingList" :key="ind">
+                                    <td class="meal-table-cell" :class="{
+                                        'deleted': deleted,
+                                    }">
+                                        <span>{{el}}</span>
+                                        <button @click="timeToCook(ind)" class="color-one">Готувати</button>
+                                    </td>
+                                </template>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <th>Виконуються</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <template v-for="(el, ind) in returnProcessingList" :key="ind">
+                                    <td class="meal-table-cell" :class="{
+                                        'deleted': deleted,
+                                    }">
+                                        <span>{{el}}</span>
+                                        <button @click="timeToServe(ind)" class="color-one">Готово</button>
+                                    </td>
+                                </template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <th>Готові до виносу</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <template v-for="(el, ind) in returnCompletedList" :key="ind">
+                                    <td class="meal-table-cell" :class="{
+                                        'deleted': deleted,
+                                    }">
+                                        <span>{{el}}</span>
+                                        <button @click="mealServed(ind)" class="color-one">Подано</button>
+                                    </td>
+                                </template>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+        const waitingList = []
+        const processingList = []
+        const completedList = []
+        let deletedItems;
+        createApp({
+            data() {
+                return {
+                    meal: null,
+                    deleted: null,
+                }
+            },
+            computed: {
+                returnWaitingList() {
+                    return waitingList;
+                },
+                returnProcessingList() {
+                    return processingList;
+                },
+                returnCompletedList() {
+                    return completedList;
+                }
+            },
+            methods: {
+                // вийшло так, що елементи переміщаються по спискам лише в тому порядку, в якому вони були додані
+                // Підкажіть будь ласка, як це можна виправити
+                addMeal() {
+                    waitingList.push(this.meal)
+                    this.onClear()
+                },
+                timeToCook(index) {
+                    this.deleteItem(waitingList)
+                    this.addToArray(processingList, deletedItems)
+                },
+                timeToServe(index) {
+                    this.deleteItem(processingList)
+                    this.addToArray(completedList, deletedItems)
+                },
+                mealServed(index) {
+                    this.deleteItem(completedList)
+                },
+                deleteItem(array, index) {
+                    deletedItems = array.splice(index, 1)
+                    this.deleted = true
+                    this.deleted = false
+                },
+
+                onClear() {
+                    this.meal = null
+                },
+                addToArray(array, deletedArray) {
+                    Array.prototype.push.apply(array, deletedArray)
+                }
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
