@@ -109,22 +109,20 @@
                 }
             },
             methods: {
-                // вийшло так, що елементи переміщаються по спискам лише в тому порядку, в якому вони були додані
-                // Підкажіть будь ласка, як це можна виправити
                 addMeal() {
                     waitingList.push(this.meal)
                     this.onClear()
                 },
                 timeToCook(index) {
-                    this.deleteItem(waitingList)
+                    this.deleteItem(waitingList, index)
                     this.addToArray(processingList, deletedItems)
                 },
                 timeToServe(index) {
-                    this.deleteItem(processingList)
+                    this.deleteItem(processingList, index)
                     this.addToArray(completedList, deletedItems)
                 },
                 mealServed(index) {
-                    this.deleteItem(completedList)
+                    this.deleteItem(completedList, index)
                 },
                 deleteItem(array, index) {
                     deletedItems = array.splice(index, 1)
